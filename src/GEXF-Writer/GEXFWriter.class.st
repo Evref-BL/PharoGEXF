@@ -84,7 +84,17 @@ GEXFWriter >> visitGEXFGraph: aGEXFGraph [
 { #category : #visiting }
 GEXFWriter >> visitGEXFMetadata: aGEXFMetadata [
 
-	writer tag name: 'meta'
+	writer tag
+		name: 'meta';
+		with: [ 
+			aGEXFMetadata creator ifNotEmpty: [ :creator | 
+					writer tag
+						name: 'creator';
+						with: [ writer string: creator ] ].
+			aGEXFMetadata description ifNotEmpty: [ :description | 
+				writer tag
+					name: 'description';
+					with: [ writer string: description ] ] ]
 ]
 
 { #category : #visiting }

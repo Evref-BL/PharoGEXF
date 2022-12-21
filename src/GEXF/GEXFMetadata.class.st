@@ -38,7 +38,9 @@ GEXFMetadata >> description: anObject [
 GEXFMetadata >> initialize [
 
 	super initialize.
-	keywords := OrderedCollection new
+	keywords := OrderedCollection new.
+	creator := ''.
+	description := ''
 ]
 
 { #category : #accessing }

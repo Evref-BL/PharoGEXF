@@ -53,6 +53,31 @@ GEXFWriter >> visitGEXF: aGEXF [
 ]
 
 { #category : #visiting }
+GEXFWriter >> visitGEXFAttribute: aGEXFAttribute [
+
+	writer tag
+		name: 'attribute';
+		attributeAt: 'id' put: aGEXFAttribute id;
+		attributeAt: 'title' put: aGEXFAttribute title;
+		attributeAt: 'type' put: aGEXFAttribute type xmlValue;
+		with: [ 
+			aGEXFAttribute defaultValue ifNotEmpty: [ :defaultValue | 
+					writer tag
+						name: 'default';
+						with: [ writer string: defaultValue ] ] ]
+]
+
+{ #category : #visiting }
+GEXFWriter >> visitGEXFAttributeList: aGEXFAttributeList [
+
+	writer tag
+		name: 'attributes';
+		attributeAt: 'class' put: aGEXFAttributeList attributesClass xmlValue;
+		with: [ 
+			aGEXFAttributeList do: [ :attribute | attribute accept: self ] ]
+]
+
+{ #category : #visiting }
 GEXFWriter >> visitGEXFEdge: aGEXFEdge [
 
 	writer tag
@@ -71,6 +96,8 @@ GEXFWriter >> visitGEXFGraph: aGEXFGraph [
 		attributeAt: 'defaultedgetype'
 		put: aGEXFGraph edgeType xmlValue.
 	tagWriter with: [ 
+		aGEXFGraph attributeLists do: [ :attributeList | 
+			attributeList accept: self ].
 		aGEXFGraph nodes ifNotEmpty: [ :nodes | 
 			writer tag
 				name: 'nodes';

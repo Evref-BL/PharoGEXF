@@ -4,10 +4,30 @@ Class {
 	#instVars : [
 		'id',
 		'label',
-		'edges'
+		'edges',
+		'attributesValue'
 	],
 	#category : #GEXF
 }
+
+{ #category : #api }
+GEXFNode >> addAttribute: aGEXFAttribute withValue: aValue [
+
+	^ self attributesValue add:
+		(GEXFAttributeValue for: aGEXFAttribute value: aValue)
+]
+
+{ #category : #accessing }
+GEXFNode >> attributesValue [
+
+	^ attributesValue
+]
+
+{ #category : #accessing }
+GEXFNode >> attributesValue: anObject [
+
+	attributesValue := anObject
+]
 
 { #category : #api }
 GEXFNode >> connectTo: aNode [
@@ -56,7 +76,8 @@ GEXFNode >> id: anObject [
 GEXFNode >> initialize [
 
 	super initialize.
-	self edges: OrderedCollection new
+	self edges: OrderedCollection new.
+	self attributesValue: OrderedCollection new
 ]
 
 { #category : #accessing }

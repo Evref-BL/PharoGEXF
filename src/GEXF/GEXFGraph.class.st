@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'nodes',
 		'edgeType',
-		'mode'
+		'mode',
+		'attributeLists'
 	],
 	#category : #GEXF
 }
@@ -13,6 +14,30 @@ Class {
 GEXFGraph >> allEdges [
 
 	^ self nodes flatCollect: [ :node | node edges ]
+]
+
+{ #category : #accessing }
+GEXFGraph >> attributeLists [
+
+	^ attributeLists
+]
+
+{ #category : #accessing }
+GEXFGraph >> attributeLists: anObject [
+
+	attributeLists := anObject
+]
+
+{ #category : #api }
+GEXFGraph >> createAttributeList [
+
+	^ self attributeLists add: GEXFAttributeList new
+]
+
+{ #category : #api }
+GEXFGraph >> createAttributeListFor: aAttributeClass [
+
+	^ self attributeLists add: (GEXFAttributeList for: aAttributeClass)
 ]
 
 { #category : #api }
@@ -47,7 +72,8 @@ GEXFGraph >> initialize [
 	super initialize.
 	self mode: GEXFMode static.
 	self edgeType: GEXFEdgeType undirected.
-	self nodes: OrderedCollection new
+	self nodes: OrderedCollection new.
+	self attributeLists: OrderedCollection new
 ]
 
 { #category : #accessing }

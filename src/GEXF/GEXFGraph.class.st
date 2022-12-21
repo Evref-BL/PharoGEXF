@@ -9,6 +9,20 @@ Class {
 	#category : #GEXF
 }
 
+{ #category : #api }
+GEXFGraph >> createNode [
+
+	^ self createNodeWithId: UUIDGenerator next asString36
+]
+
+{ #category : #api }
+GEXFGraph >> createNodeWithId: aUniqueId [
+
+	^ self nodes add: (GEXFNode new
+			   id: aUniqueId;
+			   yourself)
+]
+
 { #category : #accessing }
 GEXFGraph >> edgeType [
 

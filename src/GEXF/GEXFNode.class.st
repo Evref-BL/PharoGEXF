@@ -9,6 +9,25 @@ Class {
 	#category : #GEXF
 }
 
+{ #category : #api }
+GEXFNode >> connectTo: aNode [
+
+	self edges add: (GEXFEdge new
+			 source: self id;
+			 target: aNode id;
+			 yourself)
+]
+
+{ #category : #api }
+GEXFNode >> connectTo: aNode withId: aUniqueId [
+
+	self edges add: (GEXFEdge new
+			 id: aUniqueId;
+			 source: self id;
+			 target: aNode id;
+			 yourself)
+]
+
 { #category : #accessing }
 GEXFNode >> edges [
 

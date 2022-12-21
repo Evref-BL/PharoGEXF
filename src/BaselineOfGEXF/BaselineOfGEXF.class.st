@@ -26,5 +26,7 @@ BaselineOfGEXF >> defineGroups: spec [
 { #category : #baselines }
 BaselineOfGEXF >> definePackages: spec [
 
-	spec package: 'GEXF'
+	spec
+		package: 'GEXF';
+		package: 'GEXF-Writter' with: [ spec requires: #( 'GEXF' ) ]
 ]

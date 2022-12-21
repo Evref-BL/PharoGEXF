@@ -1,6 +1,6 @@
 # PharoGEXF
 
-Manipulate GEXF file format with Pharo.
+Manipulate [GEXF file format](https://gexf.net) with Pharo.
 
 ## Installation 
 

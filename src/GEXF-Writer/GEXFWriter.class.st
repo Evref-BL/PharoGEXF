@@ -78,6 +78,15 @@ GEXFWriter >> visitGEXFAttributeList: aGEXFAttributeList [
 ]
 
 { #category : #visiting }
+GEXFWriter >> visitGEXFAttributeValue: aGEXFAttributeValue [
+
+	writer tag
+		name: 'attvalue';
+		attributeAt: 'for' put: aGEXFAttributeValue attribute id;
+		attributeAt: 'value' put: aGEXFAttributeValue attributeValue
+]
+
+{ #category : #visiting }
 GEXFWriter >> visitGEXFEdge: aGEXFEdge [
 
 	writer tag
@@ -130,5 +139,12 @@ GEXFWriter >> visitGEXFNode: aGEXFNode [
 	writer tag
 		name: 'node';
 		attributeAt: 'id' put: aGEXFNode id;
-		attributeAt: 'label' put: aGEXFNode label
+		attributeAt: 'label' put: aGEXFNode label;
+		with: [ 
+			aGEXFNode attributesValue ifNotEmpty: [ :attributesValue | 
+					writer tag
+						name: 'attvalues';
+						with: [ 
+							attributesValue do: [ :attributeValue | 
+									attributeValue accept: self ] ] ] ]
 ]

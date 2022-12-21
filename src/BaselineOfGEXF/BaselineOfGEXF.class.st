@@ -28,5 +28,6 @@ BaselineOfGEXF >> definePackages: spec [
 
 	spec
 		package: 'GEXF';
-		package: 'GEXF-Writer' with: [ spec requires: #( 'GEXF' ) ]
+		package: 'GEXF-Writer' with: [ spec requires: #( 'GEXF' ) ];
+		package: 'GEXF-Example' with: [ spec requires: #( 'GEXF' ) ]
 ]

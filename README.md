@@ -7,7 +7,7 @@ Manipulate [GEXF file format](https://gexf.net) with Pharo.
 ```st
 Metacello new
   githubUser: 'badetitou' project: 'PharoGEXF' commitish: 'main' path: 'src';
-  baseline: 'PharoGEXF';
+  baseline: 'GEXF';
   load
 ```
 

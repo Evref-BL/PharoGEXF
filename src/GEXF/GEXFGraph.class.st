@@ -9,6 +9,12 @@ Class {
 	#category : #GEXF
 }
 
+{ #category : #accessing }
+GEXFGraph >> allEdges [
+
+	^ self nodes flatCollect: [ :node | node edges ]
+]
+
 { #category : #api }
 GEXFGraph >> createNode [
 

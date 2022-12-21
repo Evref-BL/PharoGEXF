@@ -53,9 +53,32 @@ GEXFWriter >> visitGEXF: aGEXF [
 ]
 
 { #category : #visiting }
+GEXFWriter >> visitGEXFEdge: aGEXFEdge [
+
+	writer tag
+		name: 'edge';
+		attributeAt: 'source' put: aGEXFEdge source;
+		attributeAt: 'target' put: aGEXFEdge target
+]
+
+{ #category : #visiting }
 GEXFWriter >> visitGEXFGraph: aGEXFGraph [
 
-	writer tag name: 'graph'
+	| tagWriter |
+	tagWriter := writer tag.
+	tagWriter name: 'graph'.
+	tagWriter
+		attributeAt: 'defaultedgetype'
+		put: aGEXFGraph edgeType xmlValue.
+	tagWriter with: [ 
+		aGEXFGraph nodes ifNotEmpty: [ :nodes | 
+			writer tag
+				name: 'nodes';
+				with: [ nodes do: [ :node | node accept: self ] ].
+			aGEXFGraph allEdges ifNotEmpty: [ :edges | 
+				writer tag
+					name: 'edges';
+					with: [ edges do: [ :edge | edge accept: self ] ] ] ] ]
 ]
 
 { #category : #visiting }
@@ -67,4 +90,8 @@ GEXFWriter >> visitGEXFMetadata: aGEXFMetadata [
 { #category : #visiting }
 GEXFWriter >> visitGEXFNode: aGEXFNode [
 
+	writer tag
+		name: 'node';
+		attributeAt: 'id' put: aGEXFNode id;
+		attributeAt: 'label' put: aGEXFNode label
 ]

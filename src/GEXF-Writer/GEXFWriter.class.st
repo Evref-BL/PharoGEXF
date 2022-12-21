@@ -91,8 +91,8 @@ GEXFWriter >> visitGEXFEdge: aGEXFEdge [
 
 	writer tag
 		name: 'edge';
-		attributeAt: 'source' put: aGEXFEdge source;
-		attributeAt: 'target' put: aGEXFEdge target
+		attributeAt: 'source' put: aGEXFEdge source asString;
+		attributeAt: 'target' put: aGEXFEdge target asString
 ]
 
 { #category : #visiting }
@@ -138,8 +138,8 @@ GEXFWriter >> visitGEXFNode: aGEXFNode [
 
 	writer tag
 		name: 'node';
-		attributeAt: 'id' put: aGEXFNode id;
-		attributeAt: 'label' put: aGEXFNode label;
+		attributeAt: 'id' put: aGEXFNode id asString;
+		attributeAt: 'label' put: aGEXFNode label asString;
 		with: [ 
 			aGEXFNode attributesValue ifNotEmpty: [ :attributesValue | 
 					writer tag

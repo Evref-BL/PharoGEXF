@@ -16,9 +16,10 @@ GEXFExample >> basicGraph [
 	graph edgeType: GEXFEdgeType directed.
 	node1 := graph createNodeWithId: '0'.
 	node1 label: 'Hello'.
-	node2 := graph createNodeWithId: '2'.
+	node2 := graph createNodeWithId: '1'.
 	node2 label: 'World'.
-	node1 connectTo: node2
+	node1 connectTo: node2.
+	^ gexf
 ]
 
 { #category : #examples }
@@ -79,5 +80,6 @@ GEXFExample >> data [
 	nodeGephi connectTo: nodeRTGI.
 	nodeWebatlas connectTo: nodeGephi.
 	nodeRTGI connectTo: nodeGephi.
-	nodeGephi connectTo: nodeBarabasiLab
+	nodeGephi connectTo: nodeBarabasiLab.
+	^ gexf
 ]

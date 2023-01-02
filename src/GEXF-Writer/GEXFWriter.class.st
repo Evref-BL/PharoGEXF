@@ -106,6 +106,9 @@ GEXFWriter >> visitGEXFGraph: aGEXFGraph [
 	tagWriter := writer tag.
 	tagWriter name: 'graph'.
 	tagWriter
+		attributeAt: 'mode'
+		put: aGEXFGraph mode xmlValue.
+	tagWriter
 		attributeAt: 'defaultedgetype'
 		put: aGEXFGraph edgeType xmlValue.
 	tagWriter with: [ 

@@ -57,7 +57,7 @@ GEXFExample >> data [
 
 	nodeGephi := graph createNodeWithId: '0'.
 	nodeGephi label: 'Gephi'.
-	nodeGephi addAttribute: urlAtt withValue: 'http://webatlas.fr'.
+	nodeGephi addAttribute: urlAtt withValue: 'http://gephi.org'.
 	nodeGephi addAttribute: indegreeAtt withValue: '1'.
 
 	nodeWebatlas := graph createNodeWithId: '1'.
@@ -72,14 +72,14 @@ GEXFExample >> data [
 
 	nodeBarabasiLab := graph createNodeWithId: '3'.
 	nodeBarabasiLab label: 'BarabasiLab'.
-	nodeBarabasiLab addAttribute: urlAtt withValue: 'http://rtgi.fr'.
+	nodeBarabasiLab addAttribute: urlAtt withValue: 'http://barabasilab.com'.
 	nodeBarabasiLab addAttribute: indegreeAtt withValue: '1'.
 	nodeBarabasiLab addAttribute: frogAtt withValue: 'false'.
 
 	nodeGephi connectTo: nodeWebatlas.
 	nodeGephi connectTo: nodeRTGI.
 	nodeWebatlas connectTo: nodeGephi.
-	nodeRTGI connectTo: nodeGephi.
+	nodeRTGI connectTo: nodeWebatlas.
 	nodeGephi connectTo: nodeBarabasiLab.
 	^ gexf
 ]

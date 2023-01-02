@@ -1,5 +1,8 @@
 # PharoGEXF
 
+[![Moose 10](https://github.com/badetitou/PharoGEXF/actions/workflows/test.yml/badge.svg)](https://github.com/badetitou/PharoGEXF/actions/workflows/test.yml)
+[![Coverage Status](https://coveralls.io/repos/github/badetitou/PharoGEXF/badge.svg?branch=main)](https://coveralls.io/github/badetitou/PharoGEXF?branch=main)
+
 Manipulate [GEXF file format](https://gexf.net) with Pharo.
 
 ## Installation 

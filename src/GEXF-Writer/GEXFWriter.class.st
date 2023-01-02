@@ -99,6 +99,10 @@ GEXFWriter >> visitGEXFEdge: aGEXFEdge [
 GEXFWriter >> visitGEXFGraph: aGEXFGraph [
 
 	| tagWriter |
+	
+	"Do not export the graph if there is no nodes"
+	aGEXFGraph nodes ifEmpty: [ ^ self ].
+	
 	tagWriter := writer tag.
 	tagWriter name: 'graph'.
 	tagWriter
@@ -119,6 +123,9 @@ GEXFWriter >> visitGEXFGraph: aGEXFGraph [
 
 { #category : #visiting }
 GEXFWriter >> visitGEXFMetadata: aGEXFMetadata [
+	"Do not export tag if no property is set"
+	(aGEXFMetadata creator isEmpty and: [ 
+		 aGEXFMetadata description isEmpty ]) ifTrue: [ ^ self ].
 
 	writer tag
 		name: 'meta';

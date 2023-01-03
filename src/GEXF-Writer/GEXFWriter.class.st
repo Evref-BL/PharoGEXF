@@ -83,7 +83,7 @@ GEXFWriter >> visitGEXFAttributeValue: aGEXFAttributeValue [
 	writer tag
 		name: 'attvalue';
 		attributeAt: 'for' put: aGEXFAttributeValue attribute id;
-		attributeAt: 'value' put: aGEXFAttributeValue attributeValue
+		attributeAt: 'value' put: aGEXFAttributeValue attributeValue asString
 ]
 
 { #category : #visiting }

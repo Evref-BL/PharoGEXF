@@ -36,6 +36,23 @@ GEXFWriter >> prettyPrinting [
 	writer enablePrettyPrinting
 ]
 
+{ #category : #'visiting - attributes' }
+GEXFWriter >> valueAsAttributeListStringOf: anAttributeValue [
+
+	anAttributeValue isString ifTrue: [ 
+		^ self valueAsAttributeOf: anAttributeValue ].
+	^ String streamContents: [ :stream | 
+		  anAttributeValue
+			  do: [ :val | stream << val asString ]
+			  separatedBy: [ stream << '|' ] ]
+]
+
+{ #category : #'visiting - attributes' }
+GEXFWriter >> valueAsAttributeOf: anAttributeValue [
+
+	^ anAttributeValue asString
+]
+
 { #category : #visiting }
 GEXFWriter >> visitGEXF: aGEXF [
 
@@ -83,7 +100,10 @@ GEXFWriter >> visitGEXFAttributeValue: aGEXFAttributeValue [
 	writer tag
 		name: 'attvalue';
 		attributeAt: 'for' put: aGEXFAttributeValue attribute id;
-		attributeAt: 'value' put: aGEXFAttributeValue attributeValue asString
+		attributeAt: 'value'
+		put: (aGEXFAttributeValue attribute type
+				 valueOf: aGEXFAttributeValue attributeValue
+				 using: self)
 ]
 
 { #category : #visiting }

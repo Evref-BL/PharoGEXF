@@ -116,3 +116,54 @@ GEXFWriterTest >> testExampleData [
     </graph>
 </gexf>'
 ]
+
+{ #category : #tests }
+GEXFWriterTest >> testPrintListStringAttribute [
+
+	| gexf attList listOfStringAtt node resultString |
+	gexf := GEXF new.
+	attList := gexf graph createAttributeList.
+	listOfStringAtt := attList add: ((GEXFAttribute
+			                     title: 'list of string'
+			                     type: GEXFAttributeType listString)
+			                    id: '0';
+			                    yourself).
+	node := gexf graph createNodeWithId: '2'.
+	node label: 'aLabel'.
+	node addAttribute: listOfStringAtt withValue: 'hello|world'.
+	resultString := String streamContents: [ :stream |
+		writer on: stream.
+		writer prettyPrinting.
+		node accept: writer.
+		 ].
+	self assert: resultString equals: '<node id="2" label="aLabel">
+    <attvalues>
+        <attvalue for="0" value="hello|world"/>
+    </attvalues>
+</node>'
+]
+
+{ #category : #tests }
+GEXFWriterTest >> testPrintNativeListStringAttribute [
+
+	| gexf attList listOfStringAtt node resultString |
+	gexf := GEXF new.
+	attList := gexf graph createAttributeList.
+	listOfStringAtt := attList add: ((GEXFAttribute
+			                     title: 'list of string'
+			                     type: GEXFAttributeType listString)
+			                    id: '0';
+			                    yourself).
+	node := gexf graph createNodeWithId: '2'.
+	node label: 'aLabel'.
+	node addAttribute: listOfStringAtt withValue: { 'hello'. 'world' }.
+	resultString := String streamContents: [ :stream | 
+		                writer on: stream.
+		                writer prettyPrinting.
+		                node accept: writer ].
+	self assert: resultString equals: '<node id="2" label="aLabel">
+    <attvalues>
+        <attvalue for="0" value="hello|world"/>
+    </attvalues>
+</node>'
+]

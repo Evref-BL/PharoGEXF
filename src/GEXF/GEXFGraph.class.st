@@ -88,6 +88,18 @@ GEXFGraph >> mode: anObject [
 	mode := anObject
 ]
 
+{ #category : #api }
+GEXFGraph >> nodeWithId: aUniqueId [
+
+	^ self nodeWithId: aUniqueId ifAbsent: [ nil ]
+]
+
+{ #category : #api }
+GEXFGraph >> nodeWithId: aUniqueId ifAbsent: aBlock [
+
+	^ self nodes detect: [ :node | node id = aUniqueId ] ifNone: [ aBlock value ]
+]
+
 { #category : #accessing }
 GEXFGraph >> nodes [
 
